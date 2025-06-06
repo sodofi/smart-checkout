@@ -8,6 +8,7 @@ import { useEnsAddress } from "wagmi";
 import { PoweredByPayFooter } from "@/components/powered-by-footer";
 import { arbitrumUSDC, baseUSDC, optimismUSDC, polygonUSDC } from "@daimo/pay-common";
 import Image from "next/image";
+import confetti from "canvas-confetti";
 
 function SendPageContent() {
   const searchParams = useSearchParams();
@@ -255,7 +256,7 @@ function SendPageContent() {
         </div>
 
         <DaimoPayButton.Custom
-          appId="pay-demo" // Use demo app ID - replace with your actual app ID
+          appId={process.env.NEXT_PUBLIC_DAIMO_APP_ID || 'pay-demo'}
           intent={`Send Money to ${displayName}`}
           toChain={chainIdNumber}
           toAddress={finalAddress as `0x${string}`}
@@ -265,6 +266,38 @@ function SendPageContent() {
           resetOnSuccess={true}
           onPaymentCompleted={(payment) => {
             console.log('Payment completed:', payment);
+            // Celebrate with confetti!
+            confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: { y: 0.6 },
+              colors: mode === 'green' 
+                ? ['#436A3D', '#FAE5D1', '#BDF0BE', '#D2E8C8'] 
+                : ['#444142', '#C3B7AD', '#D5C9BF', '#A09284']
+            });
+            // Add extra burst for celebration
+            setTimeout(() => {
+              confetti({
+                particleCount: 50,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: mode === 'green' 
+                  ? ['#436A3D', '#FAE5D1', '#BDF0BE'] 
+                  : ['#444142', '#C3B7AD', '#D5C9BF']
+              });
+            }, 200);
+            setTimeout(() => {
+              confetti({
+                particleCount: 50,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: mode === 'green' 
+                  ? ['#436A3D', '#FAE5D1', '#BDF0BE'] 
+                  : ['#444142', '#C3B7AD', '#D5C9BF']
+              });
+            }, 400);
           }}
           onPaymentStarted={(payment) => {
             console.log('Payment started:', payment);
