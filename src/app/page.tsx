@@ -46,6 +46,16 @@ function SendPageContent() {
       button: '#FAE5D1',
       buttonHover: '#F5D5B8',
       buttonText: '#436A3D'
+    },
+    blue: {
+      background: '#1E3A5F', // Deep navy blue
+      text: '#B8D4E8', // Light ocean blue  
+      textDark: '#7FB3D3', // Medium ocean blue
+      accent: 'rgba(184, 212, 232, 0.1)', // Light ocean blue with low opacity
+      border: 'rgba(184, 212, 232, 0.2)', // Light ocean blue border
+      button: '#B8D4E8', // Light ocean blue button
+      buttonHover: '#C8E0F2', // Lighter ocean blue on hover
+      buttonText: '#1E3A5F' // Deep navy text on buttons
     }
   };
 
@@ -82,10 +92,10 @@ function SendPageContent() {
             <li>• a = address (public address or ENS name)</li>
             <li>• c = chain ID</li>
             <li>• n = name (required for pure addresses, optional for ENS)</li>
-            <li>• m = mode (black or green, default: black)</li>
+            <li>• m = mode (black, green, or blue, default: black)</li>
           </ul>
           <p className="mt-6 text-sm opacity-75" style={{ color: colors.text }}>
-            Example: ?a=alice.eth&c=1&m=green or ?a=0x123...&c=1&n=Alice&m=black
+            Example: ?a=alice.eth&c=1&m=green or ?a=0x123...&c=1&n=Alice&m=blue
           </p>
         </div>
       </div>
@@ -161,7 +171,7 @@ function SendPageContent() {
               ></div>
               
               <Image 
-                src={mode === 'green' ? '/green.webp' : '/black.webp'}
+                src={mode === 'green' ? '/green.webp' : mode === 'blue' ? '/blue.webp' : '/black.webp'}
                 alt="Daimo Cap Logo"
                 width={200}
                 height={200}
@@ -273,6 +283,8 @@ function SendPageContent() {
               origin: { y: 0.6 },
               colors: mode === 'green' 
                 ? ['#436A3D', '#FAE5D1', '#BDF0BE', '#D2E8C8'] 
+                : mode === 'blue'
+                ? ['#1E3A5F', '#B8D4E8', '#7FB3D3', '#C8E0F2']
                 : ['#444142', '#C3B7AD', '#D5C9BF', '#A09284']
             });
             // Add extra burst for celebration
@@ -284,6 +296,8 @@ function SendPageContent() {
                 origin: { x: 0 },
                 colors: mode === 'green' 
                   ? ['#436A3D', '#FAE5D1', '#BDF0BE'] 
+                  : mode === 'blue'
+                  ? ['#1E3A5F', '#B8D4E8', '#7FB3D3']
                   : ['#444142', '#C3B7AD', '#D5C9BF']
               });
             }, 200);
@@ -295,6 +309,8 @@ function SendPageContent() {
                 origin: { x: 1 },
                 colors: mode === 'green' 
                   ? ['#436A3D', '#FAE5D1', '#BDF0BE'] 
+                  : mode === 'blue'
+                  ? ['#1E3A5F', '#B8D4E8', '#7FB3D3']
                   : ['#444142', '#C3B7AD', '#D5C9BF']
               });
             }, 400);
@@ -374,8 +390,8 @@ function SendPageContent() {
         {/* Powered by */}
         <div className="mt-6">
           <PoweredByPayFooter 
-            textColor={mode === 'green' ? colors.text : "#6B7280"}
-            hoverColor={mode === 'green' ? colors.textDark : "#374151"}
+            textColor={(mode === 'green' || mode === 'blue') ? colors.text : "#6B7280"}
+            hoverColor={(mode === 'green' || mode === 'blue') ? colors.textDark : "#374151"}
           />
         </div>
       </div>
