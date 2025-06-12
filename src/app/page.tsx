@@ -64,7 +64,9 @@ function SendPageContent() {
   // Resolve ENS to actual address
   const { data: resolvedAddress, isLoading: isResolvingENS } = useEnsAddress({
     name: isENS ? normalize(address) : undefined,
-    chainId: 8453, // Always resolve on base
+    // ENS registry + Universal Resolver live on Ethereum mainnet.
+    // Using mainnet ensures both on-chain & CCIP-read names resolve.
+    chainId: 1,
   });
 
   // Use resolved address if available, otherwise use original address
