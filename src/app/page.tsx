@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import { normalize } from "viem/ens";
 import { useEnsAddress } from "wagmi";
 import { PoweredByPayFooter } from "@/components/powered-by-footer";
-import { arbitrumUSDC, baseUSDC, optimismUSDC, polygonUSDC } from "@daimo/pay-common";
+import { arbitrumUSDC, baseUSDC, optimismUSDC, polygonUSDC, worldchainUSDC } from "@daimo/pay-common";
 import Image from "next/image";
 import confetti from "canvas-confetti";
 
@@ -64,10 +64,8 @@ function SendPageContent() {
   // Resolve ENS to actual address
   const { data: resolvedAddress, isLoading: isResolvingENS } = useEnsAddress({
     name: isENS ? normalize(address) : undefined,
-    chainId: 1, // Always resolve on mainnet
+    chainId: 8453, // Always resolve on base
   });
-
-
 
   // Use resolved address if available, otherwise use original address
   const finalAddress = isENS && resolvedAddress ? resolvedAddress : address;
@@ -137,6 +135,7 @@ function SendPageContent() {
     137: polygonUSDC, // Polygon USDC
     42161: arbitrumUSDC, // Arbitrum USDC
     8453: baseUSDC, // Base USDC
+    480: worldchainUSDC, // Worldchain USDC
   };
 
   const usdcToken = USDC_ADDRESSES[chainIdNumber as keyof typeof USDC_ADDRESSES];
