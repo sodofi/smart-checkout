@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import { normalize } from "viem/ens";
 import { useEnsAddress } from "wagmi";
 import { PoweredByPayFooter } from "@/components/powered-by-footer";
-import { arbitrumUSDC, baseUSDC, optimismUSDC, polygonUSDC, worldchainUSDC } from "@daimo/pay-common";
+import { arbitrumUSDC, baseUSDC, celoUSDC, optimismUSDC, polygonUSDC, worldchainUSDC } from "@daimo/pay-common";
 import Image from "next/image";
 import confetti from "canvas-confetti";
 
@@ -139,7 +139,11 @@ function SendPageContent() {
     );
   }
 
-  const chainIdNumber = parseInt(chainId);
+  let chainIdNumber = parseInt(chainId);
+  // transfer all eth cap to base
+  if (chainIdNumber === 1) {
+    chainIdNumber = 8453;
+  }
   
   // USDC token addresses for common chains
   const USDC_ADDRESSES = {
@@ -148,6 +152,7 @@ function SendPageContent() {
     42161: arbitrumUSDC, // Arbitrum USDC
     8453: baseUSDC, // Base USDC
     480: worldchainUSDC, // Worldchain USDC
+    42220: celoUSDC, // Celo USDC
   };
 
   const usdcToken = USDC_ADDRESSES[chainIdNumber as keyof typeof USDC_ADDRESSES];
