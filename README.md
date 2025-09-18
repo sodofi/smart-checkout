@@ -1,8 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Smart Checkout Boilerplate
 
-## Getting Started
+Product checkout UI powered by Daimo Pay. Configure via URL query params to create a simple purchase flow.
 
-First, run the development server:
+### Quick start
 
 ```bash
 npm run dev
@@ -14,23 +14,31 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000?a=merchant.eth&c=8453&n=Cap&color=green&image=/green.webp`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### URL parameters
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **a**: recipient address or ENS (required)
+- **c**: chain ID (required)
+- **n**: product name (required)
+- **m** or **color**: theme — one of `black`, `green`, `blue`, `white` (optional, default `black`)
+- **img** or **image**: product image URL or public path (optional)
 
-## Learn More
+### Supported chains and token
 
-To learn more about Next.js, take a look at the following resources:
+USDC on: Optimism (10), Polygon (137), Arbitrum (42161), Base (8453), Worldchain (480), Celo (42220).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Edit `src/app/page.tsx` to adjust the UI.
+- Colors are defined in `colorSchemes` inside `page.tsx`.
+- Powered-by footer lives in `src/components/powered-by-footer.tsx`.
 
-## Deploy on Vercel
+### Environment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Set `NEXT_PUBLIC_DAIMO_APP_ID` to your app id.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you're building on Celo and need an APP_ID, contact Sophia (Celo DevRel):
+
+- GitHub: [`sodofi`](https://github.com/sodofi)
+- Email: `sophia.dew@celo.org`

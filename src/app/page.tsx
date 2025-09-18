@@ -14,16 +14,17 @@ function SendPageContent() {
   const searchParams = useSearchParams();
   
   // Get URL parameters
-  const address = searchParams.get('a'); // public address or ENS
+  const address = searchParams.get('a'); // recipient address or ENS
   const chainId = searchParams.get('c'); // chain ID
-  const name = searchParams.get('n'); // name
-  const mode = searchParams.get('m') || 'black'; // mode: black or green, default to black
+  const product = searchParams.get('n'); // product name
+  const mode = searchParams.get('m') || searchParams.get('color') || 'black'; // theme color
+  const imageUrl = searchParams.get('img') || searchParams.get('image') || undefined; // optional product image
 
   // Check if address is an ENS name
   const isENS = address && (address.endsWith('.eth') || address.endsWith('.xyz') || address.endsWith('.com') || address.includes('.'));
   
-  // Prioritize name parameter, fallback to ENS, error if pure address without name
-  const displayName = name || (isENS ? address : null);
+  // Product name
+  const productName = product || null;
 
   // Color schemes
   const colorSchemes = {
@@ -83,7 +84,7 @@ function SendPageContent() {
   const finalAddress = isENS && resolvedAddress ? resolvedAddress : address;
 
   // Validate required parameters
-  if (!address || !chainId || !displayName) {
+  if (!address || !chainId || !productName) {
   return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: colors.background }}>
         <div className="text-center p-8 rounded-2xl border-2 relative" style={{ 
@@ -93,19 +94,17 @@ function SendPageContent() {
         }}>
           <h1 className="text-2xl font-bold mb-4" style={{ color: colors.text }}>Missing Parameters</h1>
           <p style={{ color: colors.text }}>
-            {!displayName && address && !isENS 
-              ? "Pure addresses require a name parameter (n=)"
-              : "Please provide the required URL parameters:"
-            }
+            {"Please provide the required URL parameters:"}
           </p>
           <ul className="mt-4 text-left space-y-1" style={{ color: colors.text }}>
-            <li>• a = address (public address or ENS name)</li>
+            <li>• a = recipient (address or ENS)</li>
             <li>• c = chain ID</li>
-            <li>• n = name (required for pure addresses, optional for ENS)</li>
-            <li>• m = mode (black, green, blue, or white, default: black)</li>
+            <li>• n = product name</li>
+            <li>• m or color = theme (black, green, blue, white)</li>
+            <li>• img or image = optional product image URL or /public path</li>
           </ul>
           <p className="mt-6 text-sm opacity-75" style={{ color: colors.text }}>
-            Example: ?a=alice.eth&c=1&m=green or ?a=0x123...&c=1&n=Alice&m=blue
+            Example: ?a=merchant.eth&c=8453&n=Hoodie&color=green&image=/green.webp
           </p>
         </div>
       </div>
@@ -138,13 +137,10 @@ function SendPageContent() {
       </div>
     );
   }
-
-  let chainIdNumber = parseInt(chainId);
-  // transfer all eth cap to base
-  if (chainIdNumber === 1) {
-    chainIdNumber = 8453;
-  }
   
+  // Normalize chain id to number
+  const chainIdNumber = parseInt(chainId, 10);
+
   // USDC token addresses for common chains
   const USDC_ADDRESSES = {
     10: optimismUSDC, // Optimism USDC
@@ -167,7 +163,7 @@ function SendPageContent() {
     >
       
       <div className="w-full max-w-md relative z-10">
-        {/* Title Image and Subtitle */}
+        {/* Product Image and Title */}
         <div className="text-center mb-12">
           <div className="mb-8 flex justify-center">
             <div 
@@ -186,13 +182,21 @@ function SendPageContent() {
                 }}
               ></div>
               
-              <Image 
-                src={mode === 'green' ? '/green.webp' : mode === 'blue' ? '/blue.webp' : mode === 'white' ? '/white.webp' : '/black.webp'}
-                alt="Daimo Cap Logo"
-                width={200}
-                height={200}
-                className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] object-cover object-top rounded"
-              />
+              {imageUrl && imageUrl.startsWith('http') ? (
+                <img
+                  src={imageUrl}
+                  alt={productName || 'Product'}
+                  className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] object-cover object-center rounded"
+                />
+              ) : (
+                <Image 
+                  src={imageUrl || (mode === 'green' ? '/green.webp' : mode === 'blue' ? '/blue.webp' : mode === 'white' ? '/white.webp' : '/black.webp')}
+                  alt={productName || 'Product'}
+                  width={200}
+                  height={200}
+                  className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] object-cover object-center rounded"
+                />
+              )}
               
               {/* Simple stitching effect around the frame */}
               <div 
@@ -233,7 +237,7 @@ function SendPageContent() {
             ></div>
             
             <p className="text-lg leading-relaxed relative z-10 flex items-center gap-2 flex-wrap justify-center" style={{ color: colors.text }}>
-             <span>This cap belongs to</span>
+             <span>You&apos;re purchasing</span>
              </p>
              <span 
                className="font-bold text-xl px-2 py-1 rounded relative overflow-hidden"
@@ -275,15 +279,17 @@ function SendPageContent() {
                  }}
                ></span>
                
-               <span className="relative z-10">{displayName}</span>
+                <span className="relative z-10">{productName}</span>
              </span>
 
           </div>
         </div>
 
         <DaimoPayButton.Custom
-          appId={process.env.NEXT_PUBLIC_DAIMO_APP_ID || 'pay-demo'}
-          intent={`Send Money to ${displayName}`}
+          // For Celo builders: request an APP_ID by contacting Sophia (devrel) — see
+          // https://github.com/sodofi or email sophia.dew@celo.org to obtain a key.
+          appId={process.env.NEXT_PUBLIC_DAIMO_APP_ID!}
+          intent={`Purchase ${productName}`}
           toChain={chainIdNumber}
           toAddress={finalAddress as `0x${string}`}
           toToken={usdcAddress as `0x${string}`}
@@ -403,8 +409,8 @@ function SendPageContent() {
                 }}
               ></div>
               
-              <span className="text-xl relative z-10">💸</span>
-              <span className="relative z-10">Send Money to {displayName}</span>
+              <span className="text-xl relative z-10">🛒</span>
+              <span className="relative z-10">Purchase</span>
         </button>
       )}
     </DaimoPayButton.Custom>

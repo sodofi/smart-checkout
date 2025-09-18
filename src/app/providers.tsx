@@ -6,19 +6,17 @@ import { WagmiProvider, createConfig } from "wagmi";
 
 const wagmiConfig = createConfig(
   getDefaultConfig({
-    appName: "Cap Daimo Pay",
+    appName: "Smart Checkout",
   }),
 );
 
 const queryClient = new QueryClient();
 
-const payApiUrl = "https://pay-api.daimo.xyz/";
-
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <DaimoPayProvider payApiUrl={payApiUrl}>
+        <DaimoPayProvider>
           {children}
         </DaimoPayProvider>
       </QueryClientProvider>

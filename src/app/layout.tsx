@@ -6,8 +6,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Send with Daimo Pay",
-  description: "Send USDC to any address using Daimo Pay",
+  title: "Smart Checkout",
+  description: "Product checkout boilerplate powered by Daimo Pay",
 };
 
 export default function RootLayout({
