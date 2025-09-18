@@ -14,15 +14,35 @@ pnpm dev
 bun dev
 ```
 
-Open `http://localhost:3000?a=merchant.eth&c=8453&n=Cap&color=green&image=/green.webp`.
+Open `http://localhost:3000?a=merchant.eth&n=Cap&color=green&image=/green.webp`.
+
+Optionally specify a chain ID with `c` (defaults to Celo 42220), e.g. Base:
+`http://localhost:3000?a=merchant.eth&c=8453&n=Cap`.
 
 ### URL parameters
 
 - **a**: recipient address or ENS (required)
-- **c**: chain ID (required)
 - **n**: product name (required)
+- **c**: chain ID (optional, defaults to Celo `42220`)
 - **m** or **color**: theme — one of `black`, `green`, `blue`, `white` (optional, default `black`)
 - **img** or **image**: product image URL or public path (optional)
+
+### Contactless checkout (QR + NFC)
+
+- **QR code**: Encode your checkout URL as a QR so customers can scan and pay.
+
+  - Example (CLI):
+
+  ```bash
+  npx qrcode "https://yourdomain.com?a=merchant.eth&n=Cap&color=green" -o checkout.png
+  ```
+
+  - You can also use any online QR generator; the page reads all data from the URL parameters.
+
+- **NFC tag**: Write the same URL as an NDEF URI record for tap-to-pay.
+  - **iOS**: Shortcuts app → Automation → NFC → When tag is scanned → Open URL.
+  - **Android**: Use an app like "NFC Tools" → Write → URL/URI → paste the checkout URL.
+  - Use common NTAG213/215/216 tags. Ensure the URL is publicly reachable.
 
 ### Supported chains and token
 

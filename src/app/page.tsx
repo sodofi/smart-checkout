@@ -83,8 +83,8 @@ function SendPageContent() {
   // Use resolved address if available, otherwise use original address
   const finalAddress = isENS && resolvedAddress ? resolvedAddress : address;
 
-  // Validate required parameters
-  if (!address || !chainId || !productName) {
+  // Validate required parameters (chain is optional; defaults to Celo)
+  if (!address || !productName) {
   return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: colors.background }}>
         <div className="text-center p-8 rounded-2xl border-2 relative" style={{ 
@@ -98,13 +98,13 @@ function SendPageContent() {
           </p>
           <ul className="mt-4 text-left space-y-1" style={{ color: colors.text }}>
             <li>• a = recipient (address or ENS)</li>
-            <li>• c = chain ID</li>
             <li>• n = product name</li>
+            <li>• c = optional chain ID (defaults to Celo)</li>
             <li>• m or color = theme (black, green, blue, white)</li>
             <li>• img or image = optional product image URL or /public path</li>
           </ul>
           <p className="mt-6 text-sm opacity-75" style={{ color: colors.text }}>
-            Example: ?a=merchant.eth&c=8453&n=Hoodie&color=green&image=/green.webp
+            Example: ?a=merchant.eth&n=Hoodie&color=green&image=/green.webp
           </p>
         </div>
       </div>
@@ -138,8 +138,13 @@ function SendPageContent() {
     );
   }
   
-  // Normalize chain id to number
-  const chainIdNumber = parseInt(chainId, 10);
+  // Normalize chain id to number, default to Celo (42220)
+  const defaultCeloChainId = 42220;
+  const chainIdNumber = (() => {
+    if (!chainId) return defaultCeloChainId;
+    const parsed = parseInt(chainId, 10);
+    return Number.isNaN(parsed) ? defaultCeloChainId : parsed;
+  })();
 
   // USDC token addresses for common chains
   const USDC_ADDRESSES = {
