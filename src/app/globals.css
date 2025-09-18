@@ -1,26 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;750;800;900&display=swap');
 @import "tailwindcss";
 
+/* GT Alpina font face - using a fallback serif for now since GT Alpina requires a license */
+@font-face {
+  font-family: 'GT Alpina';
+  src: local('Times New Roman'), local('Times'), serif;
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT Alpina';
+  src: local('Times New Roman'), local('Times'), serif;
+  font-weight: 100 900;
+  font-style: italic;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FCFF52; /* Celo yellow as default */
+  --foreground: #1A0329; /* Celo purple */
+  
+  /* Celo brand color variables */
+  --celo-yellow: #FCFF52;
+  --celo-green: #4E632A;
+  --celo-purple: #1A0329;
+  --celo-tan-light: #FBF6F1;
+  --celo-tan: #E6E3D5;
+  --celo-brown: #635949;
+  --celo-pink: #F2A9E7;
+  --celo-orange: #F29E5F;
+  --celo-lime: #B2EBA1;
+  --celo-blue: #8AC0F9;
+  --celo-black: #000000;
+  --celo-white: #FFFFFF;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: 'GT Alpina', Times, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Raw, industrial typography styles */
+.headline-architectural {
+  font-family: 'GT Alpina', Times, serif;
+  font-weight: 100;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.headline-emphasis {
+  font-style: italic;
+}
+
+.body-industrial {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.label-heavy {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Sharp, rectangular UI elements */
+.sharp-rect {
+  border-radius: 0;
+  border: 2px solid;
+}
+
+.color-block {
+  position: relative;
+  overflow: hidden;
+}
+
+.color-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  z-index: -1;
+}
+
+/* High contrast hover states */
+.invert-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 400;
+  /* Industrial, raw feel */
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 }

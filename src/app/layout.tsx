@@ -3,7 +3,11 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter"
+});
 
 export const metadata: Metadata = {
   title: "Smart Checkout",
@@ -15,7 +19,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-black`}>
+      <body className={`${inter.variable} font-inter body-industrial`}>
         <Providers>{children}</Providers>
       </body>
     </html>

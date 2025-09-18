@@ -17,7 +17,7 @@ bun dev
 Open `http://localhost:3000?a=merchant.eth&n=Cap&color=green&image=/green.webp`.
 
 Optionally specify a chain ID with `c` (defaults to Celo 42220), e.g. Base:
-`http://localhost:3000?a=merchant.eth&c=8453&n=Cap`.
+`http://localhost:3000?a=sophiad.eth&c=42220&n=Cap`.
 
 ### URL parameters
 

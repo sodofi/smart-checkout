@@ -22,18 +22,23 @@ export function PoweredByPayFooter({
       <a
         href={`https://pay.daimo.com?ref=${ref}`}
         target="_blank"
-        className="text-sm transition-all duration-200"
+        className="body-industrial text-xs tracking-wider transition-all duration-200 inline-block px-4 py-2 sharp-rect"
         style={{ 
           color: textColor,
+          borderColor: textColor,
+          borderWidth: '1px',
+          backgroundColor: 'transparent'
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.color = hoverColor;
+          e.currentTarget.style.borderColor = hoverColor;
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.color = textColor;
+          e.currentTarget.style.borderColor = textColor;
         }}
       >
-        Powered by Daimo Pay
+        <span className="label-heavy">POWERED BY DAIMO PAY</span>
       </a>
     </div>
   );
