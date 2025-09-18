@@ -17,7 +17,7 @@ function SendPageContent() {
   const address = searchParams.get('a'); // recipient address or ENS
   const chainId = searchParams.get('c'); // chain ID
   const product = searchParams.get('n'); // product name
-  const mode = searchParams.get('m') || searchParams.get('color') || 'black'; // theme color
+  const mode = searchParams.get('m') || searchParams.get('color') || 'white'; // theme color
   const imageUrl = searchParams.get('img') || searchParams.get('image') || undefined; // optional product image
 
   // Check if address is an ENS name
@@ -87,23 +87,23 @@ function SendPageContent() {
   if (!address || !productName) {
     return (
       <div className="min-h-screen flex items-center justify-center color-block" style={{ backgroundColor: colors.background }}>
-        <div className="max-w-2xl mx-auto p-12">
-          <h1 className="headline-architectural text-6xl md:text-8xl font-thin mb-8" style={{ color: colors.text }}>
+        <div className="max-w-2xl mx-auto p-4 sm:p-8 lg:p-12">
+          <h1 className="headline-architectural text-4xl sm:text-6xl md:text-8xl font-thin mb-4 sm:mb-8" style={{ color: colors.text }}>
             MISSING
           </h1>
-          <h2 className="headline-architectural text-3xl md:text-5xl font-thin headline-emphasis mb-12" style={{ color: colors.text }}>
+          <h2 className="headline-architectural text-2xl sm:text-3xl md:text-5xl font-thin headline-emphasis mb-8 sm:mb-12" style={{ color: colors.text }}>
             parameters
           </h2>
           
-          <div className="sharp-rect p-8 color-block" style={{ 
+          <div className="sharp-rect p-4 sm:p-6 lg:p-8 color-block" style={{ 
             backgroundColor: colors.accent, 
             borderColor: colors.text,
-            borderWidth: '3px'
+            borderWidth: '2px'
           }}>
-            <p className="body-industrial text-lg mb-6" style={{ color: colors.textSecondary }}>
+            <p className="body-industrial text-sm sm:text-lg mb-4 sm:mb-6" style={{ color: colors.textSecondary }}>
               REQUIRED URL PARAMETERS:
             </p>
-            <ul className="body-industrial space-y-3" style={{ color: colors.textSecondary }}>
+            <ul className="body-industrial space-y-2 sm:space-y-3 text-sm sm:text-base" style={{ color: colors.textSecondary }}>
               <li className="flex items-center gap-3">
                 <span className="label-heavy text-xs px-2 py-1 sharp-rect" style={{ backgroundColor: colors.text, color: colors.background }}>A</span>
                 recipient (address or ENS)
@@ -140,15 +140,15 @@ function SendPageContent() {
   // Show loading while resolving ENS
   if (isENS && isResolvingENS) {
     return (
-      <div className="min-h-screen flex items-center justify-center color-block" style={{ backgroundColor: colors.background }}>
+      <div className="min-h-screen flex items-center justify-center color-block p-4" style={{ backgroundColor: colors.background }}>
         <div className="text-center">
-          <h1 className="headline-architectural text-4xl md:text-6xl font-thin mb-8" style={{ color: colors.text }}>
+          <h1 className="headline-architectural text-3xl sm:text-4xl md:text-6xl font-thin mb-6 sm:mb-8" style={{ color: colors.text }}>
             RESOLVING
           </h1>
-          <div className="w-16 h-16 sharp-rect mx-auto" style={{ 
+          <div className="w-12 h-12 sm:w-16 sm:h-16 sharp-rect mx-auto" style={{ 
             backgroundColor: colors.accent,
             borderColor: colors.text,
-            borderWidth: '3px',
+            borderWidth: '2px',
             animation: 'pulse 2s infinite'
           }}></div>
         </div>
@@ -159,20 +159,20 @@ function SendPageContent() {
   // Check if ENS resolution failed
   if (isENS && !isResolvingENS && !resolvedAddress) {
     return (
-      <div className="min-h-screen flex items-center justify-center color-block" style={{ backgroundColor: colors.background }}>
-        <div className="max-w-xl mx-auto p-12 text-center">
-          <h1 className="headline-architectural text-5xl md:text-7xl font-thin mb-8" style={{ color: colors.text }}>
+      <div className="min-h-screen flex items-center justify-center color-block p-4" style={{ backgroundColor: colors.background }}>
+        <div className="max-w-xl mx-auto text-center">
+          <h1 className="headline-architectural text-4xl sm:text-5xl md:text-7xl font-thin mb-6 sm:mb-8" style={{ color: colors.text }}>
             FAILED
           </h1>
-          <div className="sharp-rect p-8 color-block" style={{ 
+          <div className="sharp-rect p-4 sm:p-6 lg:p-8 color-block" style={{ 
             backgroundColor: colors.accent, 
             borderColor: colors.text,
-            borderWidth: '3px'
+            borderWidth: '2px'
           }}>
-            <p className="body-industrial text-lg" style={{ color: colors.textSecondary }}>
+            <p className="body-industrial text-sm sm:text-lg" style={{ color: colors.textSecondary }}>
               COULD NOT RESOLVE ENS NAME:
             </p>
-            <p className="label-heavy text-xl mt-4" style={{ color: colors.text }}>
+            <p className="label-heavy text-lg sm:text-xl mt-3 sm:mt-4 break-all" style={{ color: colors.text }}>
               {address}
             </p>
           </div>
@@ -209,46 +209,46 @@ function SendPageContent() {
         backgroundColor: colors.background
       }}
     >
-      {/* Large architectural color blocks */}
+      {/* Large architectural color blocks - responsive */}
       <div 
-        className="absolute top-0 right-0 w-1/3 h-2/5 color-block"
+        className="absolute top-0 right-0 w-1/3 sm:w-1/4 h-2/5 sm:h-1/3 color-block"
         style={{ backgroundColor: colors.accent }}
       />
       <div 
-        className="absolute bottom-0 left-0 w-1/4 h-1/3 color-block"
+        className="absolute bottom-0 left-0 w-1/4 sm:w-1/5 h-1/3 sm:h-1/4 color-block"
         style={{ backgroundColor: colors.textSecondary }}
       />
       
       <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Main content area */}
-        <div className="flex-1 flex items-center justify-center p-8">
-          <div className="w-full max-w-2xl mx-auto">
-            {/* Oversized architectural headline */}
-            <div className="mb-16">
+        {/* Main content area - centered and responsive */}
+        <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+          <div className="w-full max-w-4xl mx-auto text-center">
+            {/* Oversized architectural headline - responsive */}
+            <div className="mb-8 sm:mb-12 lg:mb-16">
               <h1 
-                className="headline-architectural text-6xl md:text-8xl lg:text-9xl font-thin leading-none mb-4"
+                className="headline-architectural text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-thin leading-none mb-2 sm:mb-4"
                 style={{ color: colors.text }}
               >
-                SMART
+                TIPS
               </h1>
               <h2 
-                className="headline-architectural text-4xl md:text-6xl lg:text-7xl font-thin leading-none headline-emphasis"
+                className="headline-architectural text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-thin leading-none headline-emphasis"
                 style={{ color: colors.text }}
               >
-                checkout
+                Tip your coffee barista
               </h2>
             </div>
 
-            {/* Product display - sharp rectangular design */}
-            <div className="mb-16 flex justify-center">
+            {/* Product display - sharp rectangular design - responsive */}
+            <div className="mb-8 sm:mb-12 lg:mb-16 flex justify-center">
               <div className="relative">
-                {/* Sharp rectangular frame */}
+                {/* Sharp rectangular frame - responsive sizing */}
                 <div 
-                  className="w-64 h-64 md:w-80 md:h-80 sharp-rect color-block"
+                  className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 sharp-rect color-block mx-auto"
                   style={{
                     backgroundColor: colors.accent,
                     borderColor: colors.text,
-                    borderWidth: '4px'
+                    borderWidth: '3px'
                   }}
                 >
                   {imageUrl && imageUrl.startsWith('http') ? (
@@ -261,40 +261,40 @@ function SendPageContent() {
                     <Image 
                       src={imageUrl || (mode === 'green' ? '/green.webp' : mode === 'blue' ? '/blue.webp' : mode === 'white' ? '/white.webp' : '/black.webp')}
                       alt={productName || 'Product'}
-                      width={320}
-                      height={320}
+                      width={384}
+                      height={384}
                       className="w-full h-full object-cover"
                     />
                   )}
                 </div>
                 
-                {/* Product name as industrial label */}
-                <div 
-                  className="absolute -bottom-4 -right-4 px-6 py-3 sharp-rect color-block"
+                {/* Product name as industrial label - responsive */}
+                {/* <div 
+                  className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 px-3 sm:px-6 py-2 sm:py-3 sharp-rect color-block"
                   style={{
                     backgroundColor: colors.button,
                     borderColor: colors.background,
-                    borderWidth: '3px'
+                    borderWidth: '2px'
                   }}
                 >
                   <span 
-                    className="label-heavy text-sm"
+                    className="label-heavy text-xs sm:text-sm"
                     style={{ color: colors.buttonText }}
                   >
                     {productName}
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
-            {/* Industrial signage style description */}
-            <div className="mb-16 text-center">
+            {/* Industrial signage style description - responsive */}
+            {/* <div className="mb-8 sm:mb-12 lg:mb-16 text-center">
               <p 
-                className="body-industrial text-2xl md:text-3xl font-medium tracking-tight"
+                className="body-industrial text-lg sm:text-2xl md:text-3xl font-medium tracking-tight"
                 style={{ color: colors.textSecondary }}
               >
-                PURCHASE READY
+                TIP READY
               </p>
-            </div>
+            </div> */}
 
             {/* Sharp rectangular purchase button - bold and industrial */}
             <DaimoPayButton.Custom
@@ -343,11 +343,11 @@ function SendPageContent() {
               {({ show }: { show: () => void }) => (
                 <button
                   onClick={show}
-                  className="w-full md:w-auto px-16 py-8 sharp-rect color-block invert-hover"
+                  className="w-full sm:w-auto px-8 sm:px-12 lg:px-16 py-4 sm:py-6 lg:py-8 sharp-rect color-block invert-hover"
                   style={{ 
                     backgroundColor: colors.button,
                     borderColor: colors.background,
-                    borderWidth: '4px',
+                    borderWidth: '3px',
                     color: colors.buttonText
                   }}
                   onMouseEnter={(e) => {
@@ -359,8 +359,8 @@ function SendPageContent() {
                     e.currentTarget.style.color = colors.buttonText;
                   }}
                 >
-                  <span className="label-heavy text-xl tracking-wider">
-                    PURCHASE NOW
+                  <span className="label-heavy text-lg sm:text-xl lg:text-2xl tracking-wider">
+                    TIP
                   </span>
                 </button>
               )}
@@ -368,8 +368,8 @@ function SendPageContent() {
           </div>
         </div>
         
-        {/* Footer with industrial design */}
-        <div className="p-8">
+        {/* Footer with industrial design - responsive */}
+        <div className="p-4 sm:p-6 lg:p-8">
           <PoweredByPayFooter 
             textColor={colors.textSecondary}
             hoverColor={colors.text}
@@ -383,15 +383,15 @@ function SendPageContent() {
 export default function SendPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center color-block" style={{ backgroundColor: '#000000' }}>
+      <div className="min-h-screen flex items-center justify-center color-block p-4" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="text-center">
-          <h1 className="headline-architectural text-4xl md:text-6xl font-thin mb-8" style={{ color: '#FCFF52' }}>
+          <h1 className="headline-architectural text-3xl sm:text-4xl md:text-6xl font-thin mb-6 sm:mb-8" style={{ color: '#1A0329' }}>
             LOADING
           </h1>
-          <div className="w-16 h-16 sharp-rect mx-auto" style={{ 
-            backgroundColor: '#1A0329',
-            borderColor: '#FCFF52',
-            borderWidth: '3px',
+          <div className="w-12 h-12 sm:w-16 sm:h-16 sharp-rect mx-auto" style={{ 
+            backgroundColor: '#FCFF52',
+            borderColor: '#1A0329',
+            borderWidth: '2px',
             animation: 'pulse 2s infinite'
           }}></div>
         </div>

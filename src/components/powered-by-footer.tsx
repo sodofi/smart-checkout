@@ -22,7 +22,7 @@ export function PoweredByPayFooter({
       <a
         href={`https://pay.daimo.com?ref=${ref}`}
         target="_blank"
-        className="body-industrial text-xs tracking-wider transition-all duration-200 inline-block px-4 py-2 sharp-rect"
+        className="body-industrial text-xs sm:text-sm tracking-wider transition-all duration-200 inline-block px-3 sm:px-4 py-2 sharp-rect"
         style={{ 
           color: textColor,
           borderColor: textColor,
