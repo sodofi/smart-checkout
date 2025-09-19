@@ -64,9 +64,9 @@ function SendPageContent() {
       textSecondary: '#635949', // Brown
       accent: '#FCFF52', // Celo yellow
       button: '#1A0329', // Purple button
-      buttonHover: '#FFFFFF', // Invert to white
+      buttonHover: '#FCFF52', // Invert to yellow for better contrast
       buttonText: '#FFFFFF', // White text on purple
-      buttonTextHover: '#1A0329' // Purple text on white
+      buttonTextHover: '#1A0329' // Purple text on yellow
     }
   };
 
@@ -86,24 +86,24 @@ function SendPageContent() {
   // Validate required parameters (chain is optional; defaults to Celo)
   if (!address || !productName) {
     return (
-      <div className="min-h-screen flex items-center justify-center color-block" style={{ backgroundColor: colors.background }}>
-        <div className="max-w-2xl mx-auto p-4 sm:p-8 lg:p-12">
-          <h1 className="headline-architectural text-4xl sm:text-6xl md:text-8xl font-thin mb-4 sm:mb-8" style={{ color: colors.text }}>
+      <div className="min-h-screen flex items-center justify-center color-block p-3 sm:p-4 md:p-6" style={{ backgroundColor: colors.background }}>
+        <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 text-center">
+          <h1 className="headline-architectural text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin mb-3 sm:mb-4 md:mb-6" style={{ color: colors.text }}>
             MISSING
           </h1>
-          <h2 className="headline-architectural text-2xl sm:text-3xl md:text-5xl font-thin headline-emphasis mb-8 sm:mb-12" style={{ color: colors.text }}>
+          <h2 className="headline-architectural text-xl sm:text-2xl md:text-3xl lg:text-4xl font-thin headline-emphasis mb-6 sm:mb-8 md:mb-10" style={{ color: colors.text }}>
             parameters
           </h2>
           
-          <div className="sharp-rect p-4 sm:p-6 lg:p-8 color-block" style={{ 
+          <div className="sharp-rect p-4 sm:p-6 md:p-8 lg:p-10 color-block max-w-4xl mx-auto" style={{ 
             backgroundColor: colors.accent, 
             borderColor: colors.text,
-            borderWidth: '2px'
+            borderWidth: '3px'
           }}>
-            <p className="body-industrial text-sm sm:text-lg mb-4 sm:mb-6" style={{ color: colors.textSecondary }}>
+            <p className="body-industrial text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6" style={{ color: colors.textSecondary }}>
               REQUIRED URL PARAMETERS:
             </p>
-            <ul className="body-industrial space-y-2 sm:space-y-3 text-sm sm:text-base" style={{ color: colors.textSecondary }}>
+            <ul className="body-industrial space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg" style={{ color: colors.textSecondary }}>
               <li className="flex items-center gap-3">
                 <span className="label-heavy text-xs px-2 py-1 sharp-rect" style={{ backgroundColor: colors.text, color: colors.background }}>A</span>
                 recipient (address or ENS)
@@ -140,15 +140,15 @@ function SendPageContent() {
   // Show loading while resolving ENS
   if (isENS && isResolvingENS) {
     return (
-      <div className="min-h-screen flex items-center justify-center color-block p-4" style={{ backgroundColor: colors.background }}>
-        <div className="text-center">
-          <h1 className="headline-architectural text-3xl sm:text-4xl md:text-6xl font-thin mb-6 sm:mb-8" style={{ color: colors.text }}>
+      <div className="min-h-screen flex items-center justify-center color-block p-3 sm:p-4 md:p-6" style={{ backgroundColor: colors.background }}>
+        <div className="text-center w-full px-4 sm:px-6 md:px-8">
+          <h1 className="headline-architectural text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin mb-6 sm:mb-8 md:mb-10" style={{ color: colors.text }}>
             RESOLVING
           </h1>
-          <div className="w-12 h-12 sm:w-16 sm:h-16 sharp-rect mx-auto" style={{ 
+          <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 sharp-rect mx-auto" style={{ 
             backgroundColor: colors.accent,
             borderColor: colors.text,
-            borderWidth: '2px',
+            borderWidth: '3px',
             animation: 'pulse 2s infinite'
           }}></div>
         </div>
@@ -159,20 +159,20 @@ function SendPageContent() {
   // Check if ENS resolution failed
   if (isENS && !isResolvingENS && !resolvedAddress) {
     return (
-      <div className="min-h-screen flex items-center justify-center color-block p-4" style={{ backgroundColor: colors.background }}>
-        <div className="max-w-xl mx-auto text-center">
-          <h1 className="headline-architectural text-4xl sm:text-5xl md:text-7xl font-thin mb-6 sm:mb-8" style={{ color: colors.text }}>
+      <div className="min-h-screen flex items-center justify-center color-block p-3 sm:p-4 md:p-6" style={{ backgroundColor: colors.background }}>
+        <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 text-center">
+          <h1 className="headline-architectural text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-thin mb-6 sm:mb-8 md:mb-10" style={{ color: colors.text }}>
             FAILED
           </h1>
-          <div className="sharp-rect p-4 sm:p-6 lg:p-8 color-block" style={{ 
+          <div className="sharp-rect p-6 sm:p-8 md:p-10 color-block max-w-4xl mx-auto" style={{ 
             backgroundColor: colors.accent, 
             borderColor: colors.text,
-            borderWidth: '2px'
+            borderWidth: '3px'
           }}>
-            <p className="body-industrial text-sm sm:text-lg" style={{ color: colors.textSecondary }}>
+            <p className="body-industrial text-base sm:text-lg md:text-xl mb-4 sm:mb-6" style={{ color: colors.textSecondary }}>
               COULD NOT RESOLVE ENS NAME:
             </p>
-            <p className="label-heavy text-lg sm:text-xl mt-3 sm:mt-4 break-all" style={{ color: colors.text }}>
+            <p className="label-heavy text-lg sm:text-xl md:text-2xl mt-4 sm:mt-6 break-all" style={{ color: colors.text }}>
               {address}
             </p>
           </div>
@@ -209,42 +209,42 @@ function SendPageContent() {
         backgroundColor: colors.background
       }}
     >
-      {/* Large architectural color blocks - responsive */}
+      {/* Full-screen architectural color blocks */}
       <div 
-        className="absolute top-0 right-0 w-1/3 sm:w-1/4 h-2/5 sm:h-1/3 color-block"
+        className="absolute top-0 right-0 w-1/3 sm:w-2/5 md:w-1/2 h-1/3 sm:h-2/5 md:h-1/2 color-block opacity-20"
         style={{ backgroundColor: colors.accent }}
       />
       <div 
-        className="absolute bottom-0 left-0 w-1/4 sm:w-1/5 h-1/3 sm:h-1/4 color-block"
+        className="absolute bottom-0 left-0 w-1/4 sm:w-1/3 md:w-2/5 h-1/4 sm:h-1/3 md:h-2/5 color-block opacity-15"
         style={{ backgroundColor: colors.textSecondary }}
       />
       
       <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Main content area - centered and responsive */}
-        <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
-          <div className="w-full max-w-4xl mx-auto text-center">
-            {/* Oversized architectural headline - responsive */}
-            <div className="mb-8 sm:mb-12 lg:mb-16">
+        {/* Main content area - full screen utilization */}
+        <div className="flex-1 flex items-center justify-center p-3 sm:p-4 md:p-6">
+          <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center">
+            {/* Full-width architectural headline */}
+            <div className="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
               <h1 
-                className="headline-architectural text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-thin leading-none mb-2 sm:mb-4"
+                className="headline-architectural text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-thin leading-none mb-2 sm:mb-3 md:mb-4"
                 style={{ color: colors.text }}
               >
                 TIPS
               </h1>
               <h2 
-                className="headline-architectural text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-thin leading-none headline-emphasis"
+                className="headline-architectural text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-thin leading-tight headline-emphasis"
                 style={{ color: colors.text }}
               >
                 Tip your coffee barista
               </h2>
             </div>
 
-            {/* Product display - sharp rectangular design - responsive */}
-            <div className="mb-8 sm:mb-12 lg:mb-16 flex justify-center">
+            {/* Product display - larger and more prominent */}
+            <div className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 flex justify-center">
               <div className="relative">
-                {/* Sharp rectangular frame - responsive sizing */}
+                {/* Sharp rectangular frame - larger sizing */}
                 <div 
-                  className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 sharp-rect color-block mx-auto"
+                  className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 sharp-rect color-block mx-auto"
                   style={{
                     backgroundColor: colors.accent,
                     borderColor: colors.text,
@@ -261,9 +261,10 @@ function SendPageContent() {
                     <Image 
                       src={imageUrl || (mode === 'green' ? '/green.webp' : mode === 'blue' ? '/blue.webp' : mode === 'white' ? '/white.webp' : '/black.webp')}
                       alt={productName || 'Product'}
-                      width={384}
-                      height={384}
+                      width={256}
+                      height={256}
                       className="w-full h-full object-cover"
+                      priority
                     />
                   )}
                 </div>
@@ -296,8 +297,9 @@ function SendPageContent() {
               </p>
             </div> */}
 
-            {/* Sharp rectangular purchase button - bold and industrial */}
-            <DaimoPayButton.Custom
+            {/* Sharp rectangular tip button - prominent and centered */}
+            <div className="flex justify-center mt-4 sm:mt-6 md:mt-8">
+              <DaimoPayButton.Custom
               // For Celo builders: request an APP_ID by contacting Sophia (devrel) — see
               // https://github.com/sodofi or email sophia.dew@celo.org to obtain a key.
               appId={process.env.NEXT_PUBLIC_DAIMO_APP_ID!}
@@ -340,36 +342,39 @@ function SendPageContent() {
                 console.log('Payment started:', payment);
               }}
             >
-              {({ show }: { show: () => void }) => (
-                <button
-                  onClick={show}
-                  className="w-full sm:w-auto px-8 sm:px-12 lg:px-16 py-4 sm:py-6 lg:py-8 sharp-rect color-block invert-hover"
-                  style={{ 
-                    backgroundColor: colors.button,
-                    borderColor: colors.background,
-                    borderWidth: '3px',
-                    color: colors.buttonText
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.buttonHover;
-                    e.currentTarget.style.color = colors.buttonTextHover;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.button;
-                    e.currentTarget.style.color = colors.buttonText;
-                  }}
-                >
-                  <span className="label-heavy text-lg sm:text-xl lg:text-2xl tracking-wider">
-                    TIP
-                  </span>
-                </button>
-              )}
-            </DaimoPayButton.Custom>
+                {({ show }: { show: () => void }) => (
+                  <button
+                    onClick={show}
+                    className="px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 py-4 sm:py-5 md:py-6 lg:py-7 sharp-rect color-block invert-hover mx-auto"
+                    style={{ 
+                      backgroundColor: colors.button,
+                      borderColor: colors.text,
+                      borderWidth: '3px',
+                      color: colors.buttonText
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = colors.buttonHover;
+                      e.currentTarget.style.color = colors.buttonTextHover;
+                      e.currentTarget.style.borderColor = colors.buttonTextHover;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = colors.button;
+                      e.currentTarget.style.color = colors.buttonText;
+                      e.currentTarget.style.borderColor = colors.text;
+                    }}
+                  >
+                    <span className="label-heavy text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-wider">
+                      TIP
+                    </span>
+                  </button>
+                )}
+              </DaimoPayButton.Custom>
+            </div>
           </div>
         </div>
         
-        {/* Footer with industrial design - responsive */}
-        <div className="p-4 sm:p-6 lg:p-8">
+        {/* Footer with industrial design - full width */}
+        <div className="mt-auto pt-6 pb-6 sm:pb-8 md:pb-10">
           <PoweredByPayFooter 
             textColor={colors.textSecondary}
             hoverColor={colors.text}
@@ -383,15 +388,15 @@ function SendPageContent() {
 export default function SendPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center color-block p-4" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="text-center">
-          <h1 className="headline-architectural text-3xl sm:text-4xl md:text-6xl font-thin mb-6 sm:mb-8" style={{ color: '#1A0329' }}>
+      <div className="min-h-screen flex items-center justify-center color-block p-3 sm:p-4 md:p-6" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="text-center w-full px-4 sm:px-6 md:px-8">
+          <h1 className="headline-architectural text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin mb-6 sm:mb-8 md:mb-10" style={{ color: '#1A0329' }}>
             LOADING
           </h1>
-          <div className="w-12 h-12 sm:w-16 sm:h-16 sharp-rect mx-auto" style={{ 
+          <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 sharp-rect mx-auto" style={{ 
             backgroundColor: '#FCFF52',
             borderColor: '#1A0329',
-            borderWidth: '2px',
+            borderWidth: '3px',
             animation: 'pulse 2s infinite'
           }}></div>
         </div>
