@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CELO COFFEE TIPS",
+  title: "Smart Checkout",
   description: "Product checkout boilerplate powered by Daimo Pay",
 };
 
